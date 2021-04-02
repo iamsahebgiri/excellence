@@ -4,7 +4,10 @@
   "description": "API for excellence",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "migrate": "knex migrate:latest --knexfile ./src/database/knexfile.js",
+    "fresh": "knex migrate:rollback --knexfile ./src/database/knexfile.js",
+    "seed": "knex seed:run --knexfile ./src/database/knexfile.js"
   },
   "keywords": [],
   "author": "Saheb Giri",
@@ -12,7 +15,9 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "grant": "^5.4.12"
+    "grant": "^5.4.12",
+    "knex": "^0.95.4",
+    "pg": "^8.5.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

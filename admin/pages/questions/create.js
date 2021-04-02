@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import {
   Box,
   Button,
@@ -20,6 +21,10 @@ import {
 import { useRouter } from "next/router";
 import { HiOutlineX } from "react-icons/hi";
 
+const TextEditor = dynamic(() => import("@/components/TextEditor"), {
+  ssr: false,
+});
+
 const CreateQuestion = () => {
   const router = useRouter();
   return (
@@ -33,7 +38,6 @@ const CreateQuestion = () => {
         p="4"
         alignItems="center"
       >
-
         <IconButton
           p="2"
           h="10"
@@ -57,8 +61,8 @@ const CreateQuestion = () => {
           Save question
         </Button>
       </Flex>
-      <Box pt="24" />
-      <Box maxW="container.md" p="4" mx="auto">
+      <Box pt="20" />
+      <Box p="4" maxW="container.lg" mx="auto">
         <Box p="8" bg="white" rounded="md" shadow="sm" mb="8">
           <Heading size="md" mb="4">
             Question details
@@ -134,7 +138,8 @@ const CreateQuestion = () => {
           <Stack spacing="4">
             <FormControl id="question">
               <FormLabel>Write your question</FormLabel>
-              <Textarea height="16" />
+              {/* <Textarea h="200px" /> */}
+              <TextEditor />
             </FormControl>
 
             <FormControl id="options">
