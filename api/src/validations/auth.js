@@ -1,4 +1,5 @@
 const yup = require("yup");
+const ApiError = require("../middleware/ApiError");
 
 const adminRegistrationSchema = yup
   .object()
@@ -29,18 +30,34 @@ const adminLoginSchema = yup
   })
   .required();
 
-const validateAdminRegistrationInput = (data) => {
-  return adminRegistrationSchema.validate(data, {
-    strict: true,
-    abortEarly: false,
-  });
+const validateAdminRegistrationInput = () => {
+  return async (req, res, next) => {
+    try {
+      const validatedBody = await adminRegistrationSchema.validate(req.body, {
+        strict: true,
+        abortEarly: false,
+      });
+      req.body = validatedBody;
+      next();
+    } catch (err) {
+      next(ApiError.validationError(err.message, err.errors));
+    }
+  };
 };
 
-const validateAdminLoginInput = (data) => {
-  return adminLoginSchema.validate(data, {
-    strict: true,
-    abortEarly: false,
-  });
+const validateAdminLoginInput = () => {
+  return async (req, res, next) => {
+    try {
+      const validatedBody = await adminLoginSchema.validate(req.body, {
+        strict: true,
+        abortEarly: false,
+      });
+      req.body = validatedBody;
+      next();
+    } catch (err) {
+      next(ApiError.validationError(err.message, err.errors));
+    }
+  };
 };
 
 module.exports = {

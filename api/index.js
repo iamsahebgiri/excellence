@@ -4,7 +4,7 @@ const morgan = require("morgan");
 require("dotenv").config();
 
 const apiRoutes = require("./src/routes/api");
-const errorHandler = require("./src/middleware/errorHandler");
+const apiErrorHandler = require("./src/middleware/apiErrorHandler");
 
 const app = express();
 require("./src/database");
@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use("/api/v1", apiRoutes);
 
-app.use(errorHandler);
+app.use(apiErrorHandler);
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`🌀 Server started at http://localhost:${PORT}...`);
