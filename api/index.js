@@ -1,12 +1,21 @@
 const express = require("express");
+const morgan = require("morgan");
+
+require("dotenv").config();
+
+const apiRoutes = require("./src/routes/api");
+const errorHandler = require("./src/middleware/errorHandler");
+
 const app = express();
-const session = require("express-session");
-const grant = require("grant").express();
+require("./src/database");
 
-app.get("/", (req, res) => {
-  res.json({ message: "hello" });
-});
+app.use(morgan("tiny"));
+app.use(express.json());
 
-app.listen(3001, () => {
-  console.log("server running at localhost:3001...");
+app.use("/api/v1", apiRoutes);
+
+app.use(errorHandler);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`🌀 Server started at http://localhost:${PORT}...`);
 });

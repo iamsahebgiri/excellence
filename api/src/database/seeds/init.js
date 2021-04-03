@@ -2,10 +2,10 @@
  * @param {import('knex')} knex
  */
 exports.seed = async (knex) => {
-  await knex("courses")
+  await knex("course")
     .del()
     .then(() => {
-      return knex("courses").insert([
+      return knex("course").insert([
         { id: 1, name: "CBSE" },
         { id: 2, name: "Entrance Exam" },
         { id: 3, name: "Competitive Exams" },
@@ -13,10 +13,10 @@ exports.seed = async (knex) => {
         { id: 5, name: "Others" },
       ]);
     });
-  await knex("classes")
+  await knex("class")
     .del()
     .then(() => {
-      return knex("classes").insert([
+      return knex("class").insert([
         { id: 1, course_id: 1, name: "Class 01" },
         { id: 2, course_id: 1, name: "Class 02" },
         { id: 3, course_id: 1, name: "Class 03" },
@@ -52,10 +52,10 @@ exports.seed = async (knex) => {
         { id: 29, course_id: 5, name: "Others" },
       ]);
     });
-  await knex("subjects")
+  await knex("subject")
     .del()
     .then(() => {
-      return knex("subjects").insert([
+      return knex("subject").insert([
         { id: 1, class_id: 1, name: "English" },
         { id: 2, class_id: 1, name: "Hindi" },
         { id: 3, class_id: 1, name: "Mathematics" },

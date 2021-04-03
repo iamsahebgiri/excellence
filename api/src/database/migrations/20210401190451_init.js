@@ -3,32 +3,44 @@
  */
 exports.up = async (knex) => {
   await knex.schema
-    .createTable("courses", function (table) {
+    .createTable("course", function (table) {
       table.increments("id");
       table.string("name").notNullable();
     })
-    .createTable("classes", function (table) {
+    .createTable("class", function (table) {
       table.increments("id");
       table.string("name").notNullable();
-      table.integer("course_id").unsigned().notNullable();
 
       table
-        .foreign("course_id")
+        .integer("course_id")
+        .unsigned()
+        .notNullable()
         .references("id")
-        .inTable("courses")
+        .inTable("course")
         .onDelete("cascade");
     })
-    .createTable("subjects", function (table) {
+    .createTable("subject", function (table) {
       table.increments("id");
       table.string("name").notNullable();
-      table.integer("class_id").unsigned().notNullable();
 
       table
-        .foreign("class_id")
+        .integer("class_id")
+        .unsigned()
+        .notNullable()
         .references("id")
-        .inTable("classes")
+        .inTable("class")
         .onDelete("cascade");
     });
+
+  await knex.schema.createTable("user", function (table) {
+    table.increments("id");
+    table.string("email", 254).notNullable().unique();
+    table.string("name").notNullable();
+    table.string("password", 127).notNullable();
+    table.datetime("last_login");
+    table.timestamps(true, true);
+    table.datetime("deleted_at");
+  });
 };
 
 /**
@@ -36,7 +48,8 @@ exports.up = async (knex) => {
  */
 exports.down = function (knex) {
   return knex.schema
-    .dropTable("subjects")
-    .dropTable("classes")
-    .dropTable("courses");
+    .dropTable("subject")
+    .dropTable("class")
+    .dropTable("course")
+    .dropTable("user");
 };
