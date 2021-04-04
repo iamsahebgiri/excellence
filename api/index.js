@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 
 require("dotenv").config();
 
@@ -9,6 +10,7 @@ const apiErrorHandler = require("./src/middleware/apiErrorHandler");
 const app = express();
 require("./src/database");
 
+app.use(cors());
 app.use(morgan("tiny"));
 app.use(express.json());
 
