@@ -10,7 +10,7 @@ import {
   MenuItem,
   MenuList,
   Text,
-  Icon
+  Icon,
 } from "@chakra-ui/react";
 import {
   HiCollection,
@@ -21,6 +21,7 @@ import {
 import { AiFillAmazonCircle } from "react-icons/ai";
 import { MdGroupWork } from "react-icons/md";
 import NavItem from "./NavItem";
+import { removeCookie } from "@/utils/cookie";
 
 const NavGroup = ({ title, navs }) => {
   const router = useRouter();
@@ -110,7 +111,15 @@ function DashboardShell(props) {
                 >
                   Settings
                 </MenuItem>
-                <MenuItem fontSize="sm">Sign Out</MenuItem>
+                <MenuItem
+                  fontSize="sm"
+                  onClick={() => {
+                    removeCookie("token");
+                    router.replace("/login");
+                  }}
+                >
+                  Sign Out
+                </MenuItem>
               </MenuGroup>
             </MenuList>
           </Menu>

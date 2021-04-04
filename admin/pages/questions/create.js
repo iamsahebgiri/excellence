@@ -94,14 +94,6 @@ const CreateQuestion = () => {
               </Select>
             </FormControl>
 
-            <FormControl id="topic">
-              <FormLabel>Topic</FormLabel>
-              <Select placeholder="Select topic">
-                <option>United Arab Emirates</option>
-                <option>Nigeria</option>
-              </Select>
-            </FormControl>
-
             <FormControl id="questionType">
               <FormLabel>Question type</FormLabel>
               <Select placeholder="Select question type">

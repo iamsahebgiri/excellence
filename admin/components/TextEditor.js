@@ -47,8 +47,7 @@ class TextEditor extends React.Component {
             "insertdatetime media table paste code help wordcount tiny_mce_wiris",
           ],
           toolbar:
-            "undo redo | \
-              bold italic underline subscript superscript removeformat | \
+            "bold italic underline subscript superscript removeformat | \
               alignleft aligncenter alignright alignjustify | \
               bullist numlist outdent indent | \
               table image codesample|  fullscreen code | preview tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry",
