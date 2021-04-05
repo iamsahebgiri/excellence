@@ -1,5 +1,5 @@
 const express = require("express");
-const auth = require("../../controllers/auth");
+const authController = require("../../controllers/auth");
 const {
   validateAdminRegistrationInput,
   validateAdminLoginInput,
@@ -7,7 +7,7 @@ const {
 
 const router = express.Router();
 
-router.post("/register", validateAdminRegistrationInput(), auth.register);
-router.post("/login", validateAdminLoginInput(), auth.login);
+router.post("/register", validateAdminRegistrationInput(), authController.register);
+router.post("/login", validateAdminLoginInput(), authController.login);
 
 module.exports = router;

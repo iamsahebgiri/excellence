@@ -14,7 +14,6 @@ const register = async (req, res, next) => {
       return;
     }
 
-
     const hashedPassword = await hashPassword(password);
     const insertedUser = await User.query().insert({
       name,
@@ -51,8 +50,6 @@ const login = async (req, res, next) => {
 
     const validPassword = await validatePassword(user.password, password);
 
-    console.log(validPassword)
-    
     if (!validPassword) {
       next(ApiError.badRequest("Invalid passowrd."));
       return;
