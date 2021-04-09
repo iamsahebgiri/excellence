@@ -9,6 +9,7 @@
     "node": ">=12.0.0"
   },
   "scripts": {
+    "seed": "cross-env NODE_ENV=development node src/seed.js",
     "start": "pm2 start ecosystem.config.json --no-daemon",
     "dev": "cross-env NODE_ENV=development nodemon src/index.js",
     "test": "jest -i --colors --verbose --detectOpenHandles",
