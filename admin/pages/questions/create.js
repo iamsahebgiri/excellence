@@ -1,3 +1,4 @@
+import { useState } from "react";
 import dynamic from "next/dynamic";
 import {
   Box,
@@ -13,158 +14,252 @@ import {
   Input,
   Radio,
   RadioGroup,
-  Select,
   Spacer,
   Stack,
+  Switch,
   Textarea,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { HiOutlineX } from "react-icons/hi";
+import useSWR from "swr";
+import { useForm, Controller } from "react-hook-form";
+import { useStoreActions, useStoreState } from "easy-peasy";
+import SelectField from "@/components/SelectField";
+import CreateQuestionHeading from "@/components/questions/CreateQuestionHeading";
 
 const TextEditor = dynamic(() => import("@/components/TextEditor"), {
   ssr: false,
 });
 
 const CreateQuestion = () => {
+  const { data: courses, error: courseError } = useSWR(
+    `${process.env.NEXT_PUBLIC_API_URL}/courses`
+  );
+  const classes = useStoreState((state) => state.classes);
+  const subjects = useStoreState((state) => state.subjects);
+  const getClasses = useStoreActions((actions) => actions.getClasses);
+  const getSubjects = useStoreActions((actions) => actions.getSubjects);
+  const addSubjects = useStoreActions((actions) => actions.addSubjects);
+
+  const [isMcqSelected, setIsMcqSelected] = useState(false);
+
+  const {
+    register,
+    control,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
   const router = useRouter();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
+  const handleOnChange = (e) => {
+    if (e.target.id === "board") {
+      addSubjects([]);
+      getClasses(e.target.value);
+    }
+
+    if (e.target.id === "class") {
+      getSubjects(e.target.value);
+    }
+
+    if (e.target.id === "questionType") {
+      if (e.target.value === "mcq") setIsMcqSelected(true);
+      else setIsMcqSelected(false);
+    }
+
+    console.log(e.target.id);
+  };
+
+  if (!courses) return "Loading...";
+  if (courseError) return "error";
   return (
     <Box minH="100vh" bg="gray.50">
-      <Flex
-        borderBottomWidth="1px"
-        bg="gray.50"
-        zIndex="2"
-        position="fixed"
-        width="100%"
-        p="4"
-        alignItems="center"
-      >
-        <IconButton
-          p="2"
-          h="10"
-          w="8"
-          mr="4"
-          rounded="full"
-          variant="ghost"
-          onClick={() => {
-            router.back();
-          }}
-        >
-          <Icon as={HiOutlineX} h="5" w="5" color="gray.600" />
-        </IconButton>
-        <Heading size="md">Add a question</Heading>
-        <Spacer />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CreateQuestionHeading />
 
-        <Button size="sm" mr="4">
-          Save and add new
-        </Button>
-        <Button size="sm" colorScheme="messenger">
-          Save question
-        </Button>
-      </Flex>
-      <Box pt="20" />
-      <Box p="4" maxW="container.lg" mx="auto">
-        <Box p="8" bg="white" rounded="md" shadow="sm" mb="8">
-          <Heading size="md" mb="4">
-            Question details
-          </Heading>
+        <Stack spacing="8" p="4" maxW="container.md" mx="auto">
+          <Box p="8" bg="white" rounded="md" shadow="sm">
+            <Heading size="md" mb="4">
+              Question details
+            </Heading>
+            <Stack spacing="4">
+              <HStack>
+                <Controller
+                  control={control}
+                  name="course_id"
+                  render={({ field: { onChange, onBlur, value, ref } }) => (
+                    <SelectField
+                      id="board"
+                      label="Board"
+                      data={courses}
+                      value={value}
+                      onChange={(e) => {
+                        onChange(e);
+                        handleOnChange(e);
+                      }}
+                    />
+                  )}
+                />
 
-          <Stack spacing="4">
-            <HStack>
-              <FormControl id="board">
-                <FormLabel>Board</FormLabel>
-                <Select placeholder="Select board">
-                  <option>United Arab Emirates</option>
-                  <option>Nigeria</option>
-                </Select>
+                <Controller
+                  control={control}
+                  name="class_id"
+                  render={({ field: { onChange, onBlur, value, ref } }) => (
+                    <SelectField
+                      id="class"
+                      label="Class"
+                      data={classes}
+                      value={value}
+                      onChange={(e) => {
+                        onChange(e);
+                        handleOnChange(e);
+                      }}
+                    />
+                  )}
+                />
+              </HStack>
+
+              <Controller
+                control={control}
+                name="subject_id"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <SelectField
+                    id="subject"
+                    label="Subject"
+                    data={subjects}
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
+              />
+
+              <Controller
+                control={control}
+                name="question_type"
+                render={({ field: { onChange, onBlur, value, ref } }) => (
+                  <SelectField
+                    id="questionType"
+                    label="Question type"
+                    data={[
+                      { id: "mcq", name: "MCQ" },
+                      { id: "subjective", name: "Subjective" },
+                    ]}
+                    value={value}
+                    onBlur={onBlur}
+                    onChange={(e) => {
+                      onChange(e);
+                      handleOnChange(e);
+                    }}
+                  />
+                )}
+              />
+
+              <HStack>
+                <Controller
+                  control={control}
+                  name="difficulty"
+                  render={({ field: { onChange, onBlur, value, ref } }) => (
+                    <SelectField
+                      id="difficulty"
+                      label="Difficulty"
+                      data={[
+                        { id: "beginner", name: "Beginner" },
+                        { id: "easy", name: "Easy" },
+                        { id: "normal", name: "Normal" },
+                        { id: "hard", name: "Hard" },
+                        { id: "very hard", name: "Very hard" },
+                      ]}
+                      value={value}
+                      onBlur={onBlur}
+                      onChange={(e) => {
+                        onChange(e);
+                        handleOnChange(e);
+                      }}
+                    />
+                  )}
+                />
+
+                <FormControl id="rightMark">
+                  <FormLabel>Right mark</FormLabel>
+                  <Input
+                    type="number"
+                    defaultValue="1"
+                    {...register("right_mark")}
+                  />
+                </FormControl>
+                <FormControl id="wrongMark">
+                  <FormLabel>Wrong mark</FormLabel>
+                  <Input
+                    type="number"
+                    defaultValue="0"
+                    {...register("wrong_mark")}
+                  />
+                </FormControl>
+              </HStack>
+            </Stack>
+          </Box>
+          <Box p="8" bg="white" rounded="md" shadow="sm">
+            <Heading size="md" mb="4">
+              Question
+            </Heading>
+
+            <Stack spacing="6">
+              <FormControl id="question">
+                <FormLabel>Write your question</FormLabel>
+                <TextEditor />
               </FormControl>
-              <FormControl id="class">
-                <FormLabel>Class</FormLabel>
-                <Select placeholder="Select class">
-                  <option>United Arab Emirates</option>
-                  <option>Nigeria</option>
-                </Select>
-              </FormControl>
-            </HStack>
 
-            <FormControl id="subject">
-              <FormLabel>Subject</FormLabel>
-              <Select placeholder="Select subject">
-                <option>United Arab Emirates</option>
-                <option>Nigeria</option>
-              </Select>
-            </FormControl>
+              {isMcqSelected && (
+                <>
+                  <Flex alignItems="center" justifyContent="space-between">
+                    <Heading size="sm">Options</Heading>
 
-            <FormControl id="questionType">
-              <FormLabel>Question type</FormLabel>
-              <Select placeholder="Select question type">
-                <option>United Arab Emirates</option>
-                <option>Nigeria</option>
-              </Select>
-            </FormControl>
-
-            <HStack>
-              <FormControl id="difficulty">
-                <FormLabel>Difficulty</FormLabel>
-                <Select placeholder="Select difficulty">
-                  <option>Easy</option>
-                  <option>Medium</option>
-                  <option>Difficult</option>
-                </Select>
-              </FormControl>
-              <FormControl id="rightMark">
-                <FormLabel>Right mark</FormLabel>
-                <Input type="number" defaultValue="1" />
-              </FormControl>
-              <FormControl id="wrongMark">
-                <FormLabel>Wrong mark</FormLabel>
-                <Input type="number" defaultValue="0" />
-              </FormControl>
-            </HStack>
-          </Stack>
-        </Box>
-        <Box p="8" bg="white" rounded="md" shadow="sm">
-          {/* <Heading size="md" mb="4">
-            Question details
-          </Heading> */}
-
-          <Stack spacing="4">
-            <FormControl id="question">
-              <FormLabel>Write your question</FormLabel>
-              {/* <Textarea h="200px" /> */}
-              <TextEditor />
-            </FormControl>
-
-            <FormControl id="options">
-              <FormLabel>Options</FormLabel>
-              <RadioGroup defaultValue="a">
-                <Stack spacing="6">
-                  <Flex>
-                    <Radio value="a" mr="4" />
-                    <Input type="text" />
+                    <FormControl
+                      display="flex"
+                      width="auto"
+                      alignItems="center"
+                    >
+                      <FormLabel htmlFor="email-alerts" mb="0">
+                        Enable editor
+                      </FormLabel>
+                      <Switch id="email-alerts" />
+                    </FormControl>
                   </Flex>
-                  <Flex>
-                    <Radio value="b" mr="4" />
-                    <Input type="text" />
-                  </Flex>
-                  <Flex>
-                    <Radio value="c" mr="4" />
-                    <Input type="text" />
-                  </Flex>
-                  <Flex>
-                    <Radio value="d" mr="4" />
-                    <Input type="text" />
-                  </Flex>
-                </Stack>
-              </RadioGroup>
-            </FormControl>
+                  <RadioGroup defaultValue="a">
+                    <Stack spacing="6">
+                      <Flex>
+                        <Radio value="a" mr="4" />
+                        <Input type="text" />
+                      </Flex>
+                      <Flex>
+                        <Radio value="b" mr="4" />
+                        <Input type="text" />
+                      </Flex>
+                      <Flex>
+                        <Radio value="c" mr="4" />
+                        <Input type="text" />
+                      </Flex>
+                      <Flex>
+                        <Radio value="d" mr="4" />
+                        <Input type="text" />
+                      </Flex>
+                    </Stack>
+                  </RadioGroup>
+                </>
+              )}
 
-            <FormControl id="solutions">
-              <FormLabel>Solutions</FormLabel>
-              <Textarea focusBorderColor="messenger.500" />
-            </FormControl>
-          </Stack>
-        </Box>
-      </Box>
+              <FormControl id="solutions">
+                <FormLabel>Solutions</FormLabel>
+                <Textarea height="48" focusBorderColor="messenger.500" />
+              </FormControl>
+            </Stack>
+          </Box>
+        </Stack>
+      </form>
     </Box>
   );
 };

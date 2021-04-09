@@ -22,6 +22,12 @@ const theme = extendTheme({
         focusBorderColor: "messenger.500",
       },
     },
+    Switch: {
+      defaultProps: {
+        focusBorderColor: "messenger.500",
+      },
+    },
+    
   },
   fonts: {
     heading: `Manrope, Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"`,

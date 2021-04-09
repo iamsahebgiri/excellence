@@ -4,7 +4,7 @@ import PageHeading from "@/components/PageHeading";
 const Index = () => {
   return (
     <DashboardShell>
-      <PageHeading title="Welcome back, Saheb" />
+      <PageHeading title="Welcome back, Guest" />
     </DashboardShell>
   );
 };

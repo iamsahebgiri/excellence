@@ -28,7 +28,7 @@ export const LoginForm = () => {
     setApiError(null);
     axios({
       method: "post",
-      url: "http://localhost:3001/api/v1/auth/login",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
       data,
     })
       .then(function (res) {

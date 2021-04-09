@@ -25,7 +25,7 @@ if (typeof window !== "undefined") {
   require("tinymce/plugins/paste");
   require("tinymce/plugins/help");
   require("tinymce/plugins/wordcount");
-  require("../public/assets/libs/tinymce/plugins/wiris");
+  // require("../public/assets/libs/tinymce/plugins/wiris");
 }
 
 class TextEditor extends React.Component {
@@ -36,24 +36,31 @@ class TextEditor extends React.Component {
   render() {
     return (
       <Editor
-        initialValue="<p>This is the initial content of the editor</p>"
+        initialValue=""
         init={{
           height: 300,
           statusbar: false,
           menubar: false,
+          external_plugins: {
+            mathjax: "/assets/libs/tinymce/plugins/mathjax.js",
+          },
+          mathjax: {
+            lib: "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js",
+          },
+
           plugins: [
             "advlist autolink lists link image charmap print preview anchor",
             "searchreplace visualblocks code codesample fullscreen",
-            "insertdatetime media table paste code help wordcount tiny_mce_wiris",
+            "insertdatetime media table paste code help wordcount",
           ],
           toolbar:
             "bold italic underline subscript superscript removeformat | \
               alignleft aligncenter alignright alignjustify | \
-              bullist numlist outdent indent | \
-              table image codesample|  fullscreen code | preview tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry",
-          skin_url: "/assets/libs/tinymce/skins/ui/oxide", // Static files path(step 2)
+              bullist numlist | \
+              table image codesample mathjax| fullscreen ",
+          skin_url: "/assets/libs/tinymce/skins/ui/custom",
           content_css:
-            "/assets/libs/tinymce/skins/content/default/content.min.css", // Static files path(step 2)
+            "/assets/libs/tinymce/skins/content/default/content.min.css",
         }}
         onEditorChange={this.handleEditorChange}
       />

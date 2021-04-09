@@ -6,6 +6,7 @@
       "@/lib/*": ["lib/*"],
       "@/theme/*": ["theme/*"],
       "@/utils/*": ["utils/*"],
+      "@/store/*": ["store/*"],
     }
   },
   "exclude": ["node_modules/"]

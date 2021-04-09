@@ -12,9 +12,11 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^1.4.1",
+    "@dimakorotkov/tinymce-mathjax": "^1.0.6",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "@tinymce/tinymce-react": "^3.12.1",
+    "easy-peasy": "^5.0.3",
     "framer-motion": "^4",
     "next": "^10.0.9",
     "react": "^17.0.2",

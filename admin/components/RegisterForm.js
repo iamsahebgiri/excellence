@@ -28,7 +28,7 @@ export const RegisterForm = () => {
     setApiError(null);
     axios({
       method: "post",
-      url: "http://localhost:3001/api/v1/auth/register",
+      url: `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
       data,
     })
       .then(function (res) {
