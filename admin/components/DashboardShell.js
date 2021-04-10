@@ -1,27 +1,27 @@
-import { useRouter } from "next/router";
-import React from "react";
 import {
   Avatar,
   Box,
   Flex,
+  Icon,
   Menu,
   MenuButton,
   MenuGroup,
   MenuItem,
   MenuList,
   Text,
-  Icon,
 } from "@chakra-ui/react";
+import { useStoreActions } from "easy-peasy";
+import { useRouter } from "next/router";
+import React from "react";
+import { AiFillAmazonCircle } from "react-icons/ai";
 import {
   HiCollection,
   HiNewspaper,
   HiOfficeBuilding,
   HiUsers,
 } from "react-icons/hi";
-import { AiFillAmazonCircle } from "react-icons/ai";
 import { MdGroupWork } from "react-icons/md";
 import NavItem from "./NavItem";
-import { removeCookie } from "@/utils/cookie";
 
 const NavGroup = ({ title, navs }) => {
   const router = useRouter();
@@ -48,6 +48,7 @@ const NavGroup = ({ title, navs }) => {
 
 function DashboardShell(props) {
   const router = useRouter();
+  const { logout } = useStoreActions((actions) => actions.auth);
 
   const examNavs = [
     {
@@ -97,7 +98,7 @@ function DashboardShell(props) {
             <MenuButton>
               <Avatar
                 size="sm"
-                name="Dan Abrahmov"
+                name="Saheb Giri"
                 src="https://via.placeholder.com/100/000000/FFFFFF/"
               />
             </MenuButton>
@@ -106,18 +107,12 @@ function DashboardShell(props) {
                 <MenuItem
                   fontSize="sm"
                   onClick={() => {
-                    router.push("/admin/account");
+                    router.push("/account");
                   }}
                 >
                   Settings
                 </MenuItem>
-                <MenuItem
-                  fontSize="sm"
-                  onClick={() => {
-                    removeCookie("token");
-                    router.replace("/login");
-                  }}
-                >
+                <MenuItem fontSize="sm" onClick={logout}>
                   Sign Out
                 </MenuItem>
               </MenuGroup>

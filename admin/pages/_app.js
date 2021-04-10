@@ -1,8 +1,13 @@
 import customTheme from "@/theme/index";
 import store from "@/store/index";
-import { StoreProvider } from 'easy-peasy';
+import { StoreProvider, useStoreRehydrated } from "easy-peasy";
 import { ChakraProvider } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
+
+function WaitForStateRehydration({ children }) {
+  const isRehydrated = useStoreRehydrated();
+  return isRehydrated ? children : null;
+}
 
 const App = ({ Component, pageProps }) => {
   return (
@@ -14,7 +19,9 @@ const App = ({ Component, pageProps }) => {
               fetch(resource, init).then((res) => res.json()),
           }}
         >
-          <Component {...pageProps} />
+          <WaitForStateRehydration>
+            <Component {...pageProps} />
+          </WaitForStateRehydration>
         </SWRConfig>
       </ChakraProvider>
     </StoreProvider>

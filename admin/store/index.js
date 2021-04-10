@@ -1,32 +1,10 @@
-import { createStore, action, thunk } from "easy-peasy";
-import axios from "redaxios";
+import { createStore, persist } from "easy-peasy";
+import authModel from "./authModel";
+import categoryModel from "./categoryModel";
 
 const store = createStore({
-  courses: [],
-  classes: [],
-  subjects: [],
-
-  addClasses: action((state, payload) => {
-    state.classes = payload;
-  }),
-
-  addSubjects: action((state, payload) => {
-    state.subjects = payload;
-  }),
-
-  getClasses: thunk(async (actions, id) => {
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/classes?course_id=${id}`
-    );
-    actions.addClasses(data);
-  }),
-
-  getSubjects: thunk(async (actions, id) => {
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_API_URL}/subjects?class_id=${id}`
-    );
-    actions.addSubjects(data);
-  }),
+  category: categoryModel,
+  auth: persist(authModel, { storage: "localStorage" }),
 });
 
 export default store;

@@ -7,47 +7,27 @@ import {
   Input,
   Stack,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
-import axios from "redaxios";
 import { PasswordField } from "./PasswordField";
-import { setCookie } from "@/utils/cookie";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 export const LoginForm = () => {
-  const [apiError, setApiError] = useState(null);
-  const router = useRouter();
+  const { error, isSubmitting } = useStoreState((state) => state.auth);
+  const login = useStoreActions((actions) => actions.auth.login);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { isSubmitting },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    setApiError(null);
-    axios({
-      method: "post",
-      url: `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
-      data,
-    })
-      .then(function (res) {
-        setCookie("token", res.data.token, 30);
-        router.replace("/");
-      })
-      .catch(function (error) {
-        setApiError(error.data?.message);
-        console.log(error.data);
-      });
+    login(data);
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing="6">
-        {apiError && (
+        {error && (
           <Alert status="error" rounded="md">
             <AlertIcon />
-            {apiError}
+            {error}
           </Alert>
         )}
 
