@@ -29,10 +29,6 @@ if (typeof window !== "undefined") {
 }
 
 class TextEditor extends React.Component {
-  handleEditorChange = (content, editor) => {
-    console.log(content);
-  };
-
   render() {
     return (
       <Editor
@@ -62,7 +58,7 @@ class TextEditor extends React.Component {
           content_css:
             "/assets/libs/tinymce/skins/content/default/content.min.css",
         }}
-        onEditorChange={this.handleEditorChange}
+        onEditorChange={this.props.handleEditorChange}
       />
     );
   }

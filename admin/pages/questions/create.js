@@ -1,59 +1,87 @@
-import { useState } from "react";
-import dynamic from "next/dynamic";
+import CreateQuestionHeading from "@/components/questions/CreateQuestionHeading";
+import SelectField from "@/components/SelectField";
+import axios from "@/utils/axios";
 import {
   Box,
-  Button,
-  Divider,
   Flex,
   FormControl,
   FormLabel,
   Heading,
   HStack,
-  Icon,
-  IconButton,
   Input,
   Radio,
   RadioGroup,
-  Spacer,
   Stack,
   Switch,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { HiOutlineX } from "react-icons/hi";
-import useSWR from "swr";
-import { useForm, Controller } from "react-hook-form";
+import config from "config/config";
 import { useStoreActions, useStoreState } from "easy-peasy";
-import SelectField from "@/components/SelectField";
-import CreateQuestionHeading from "@/components/questions/CreateQuestionHeading";
+import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
 const TextEditor = dynamic(() => import("@/components/TextEditor"), {
   ssr: false,
 });
 
 const CreateQuestion = () => {
-  const { data: courses, error: courseError } = useSWR(
-    `${process.env.NEXT_PUBLIC_API_URL}/courses`
+  const courses = useStoreState((state) => state.category.courses);
+  const classes = useStoreState((state) => state.category.classes);
+  const subjects = useStoreState((state) => state.category.subjects);
+
+  const getCourses = useStoreActions((actions) => actions.category.getCourses);
+  const getClasses = useStoreActions((actions) => actions.category.getClasses);
+  const getSubjects = useStoreActions(
+    (actions) => actions.category.getSubjects
   );
-  const classes = useStoreState((state) => state.classes);
-  const subjects = useStoreState((state) => state.subjects);
-  const getClasses = useStoreActions((actions) => actions.getClasses);
-  const getSubjects = useStoreActions((actions) => actions.getSubjects);
-  const addSubjects = useStoreActions((actions) => actions.addSubjects);
+
+  const addSubjects = useStoreActions(
+    (actions) => actions.category.addSubjects
+  );
 
   const [isMcqSelected, setIsMcqSelected] = useState(false);
-
-  const {
-    register,
-    control,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
-
+  const [editorValue, setEditorValue] = useState("");
+  const { register, control, handleSubmit } = useForm();
+  
+  const toast = useToast();
   const router = useRouter();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  useEffect(() => {
+    getCourses();
+  }, []);
+
+  const onSubmit = async (formData) => {
+    axios
+      .post(`${config.API_URL}/questions`, {
+        ...formData,
+        questionText: editorValue,
+      })
+      .then((res) => {
+        const { data } = res;
+        console.log(data);
+        toast({
+          title: "Question added successfully",
+          description: "Your question has been added successfully.",
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+        });
+
+        router.push("/questions");
+      })
+      .catch((err) => {
+        // console.log(err.response);
+        toast({
+          title: "Invalid question",
+          description: err.response?.data?.message,
+          status: "error",
+          duration: 9000,
+          isClosable: true,
+        });
+      });
   };
 
   const handleOnChange = (e) => {
@@ -67,15 +95,15 @@ const CreateQuestion = () => {
     }
 
     if (e.target.id === "questionType") {
-      if (e.target.value === "mcq") setIsMcqSelected(true);
+      if (e.target.value === "objective") setIsMcqSelected(true);
       else setIsMcqSelected(false);
     }
-
-    console.log(e.target.id);
   };
 
-  if (!courses) return "Loading...";
-  if (courseError) return "error";
+  const handleEditorChange = (content, editor) => {
+    setEditorValue(content);
+  };
+
   return (
     <Box minH="100vh" bg="gray.50">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -90,13 +118,14 @@ const CreateQuestion = () => {
               <HStack>
                 <Controller
                   control={control}
-                  name="course_id"
+                  name="courseId"
                   render={({ field: { onChange, onBlur, value, ref } }) => (
                     <SelectField
                       id="board"
                       label="Board"
                       data={courses}
                       value={value}
+                      required={true}
                       onChange={(e) => {
                         onChange(e);
                         handleOnChange(e);
@@ -107,11 +136,12 @@ const CreateQuestion = () => {
 
                 <Controller
                   control={control}
-                  name="class_id"
+                  name="classId"
                   render={({ field: { onChange, onBlur, value, ref } }) => (
                     <SelectField
                       id="class"
                       label="Class"
+                      required={true}
                       data={classes}
                       value={value}
                       onChange={(e) => {
@@ -123,48 +153,52 @@ const CreateQuestion = () => {
                 />
               </HStack>
 
-              <Controller
-                control={control}
-                name="subject_id"
-                render={({ field: { onChange, onBlur, value, ref } }) => (
-                  <SelectField
-                    id="subject"
-                    label="Subject"
-                    data={subjects}
-                    value={value}
-                    onChange={onChange}
-                  />
-                )}
-              />
+              <HStack>
+                <Controller
+                  control={control}
+                  name="subjectId"
+                  render={({ field: { onChange, onBlur, value, ref } }) => (
+                    <SelectField
+                      id="subject"
+                      label="Subject"
+                      required={true}
+                      data={subjects}
+                      value={value}
+                      onChange={onChange}
+                    />
+                  )}
+                />
 
-              <Controller
-                control={control}
-                name="question_type"
-                render={({ field: { onChange, onBlur, value, ref } }) => (
-                  <SelectField
-                    id="questionType"
-                    label="Question type"
-                    data={[
-                      { id: "mcq", name: "MCQ" },
-                      { id: "subjective", name: "Subjective" },
-                    ]}
-                    value={value}
-                    onBlur={onBlur}
-                    onChange={(e) => {
-                      onChange(e);
-                      handleOnChange(e);
-                    }}
-                  />
-                )}
-              />
+                <Controller
+                  control={control}
+                  name="questionType"
+                  render={({ field: { onChange, onBlur, value, ref } }) => (
+                    <SelectField
+                      id="questionType"
+                      required={true}
+                      label="Question type"
+                      data={[
+                        { id: "objective", name: "Objective" },
+                        { id: "subjective", name: "Subjective" },
+                      ]}
+                      value={value}
+                      onBlur={onBlur}
+                      onChange={(e) => {
+                        onChange(e);
+                        handleOnChange(e);
+                      }}
+                    />
+                  )}
+                />
+              </HStack>
 
               <HStack>
                 <Controller
                   control={control}
-                  name="difficulty"
+                  name="difficultyLevel"
                   render={({ field: { onChange, onBlur, value, ref } }) => (
                     <SelectField
-                      id="difficulty"
+                      id="difficultyLevel"
                       label="Difficulty"
                       data={[
                         { id: "beginner", name: "Beginner" },
@@ -173,6 +207,7 @@ const CreateQuestion = () => {
                         { id: "hard", name: "Hard" },
                         { id: "very hard", name: "Very hard" },
                       ]}
+                      required={true}
                       value={value}
                       onBlur={onBlur}
                       onChange={(e) => {
@@ -185,19 +220,11 @@ const CreateQuestion = () => {
 
                 <FormControl id="rightMark">
                   <FormLabel>Right mark</FormLabel>
-                  <Input
-                    type="number"
-                    defaultValue="1"
-                    {...register("right_mark")}
-                  />
+                  <Input defaultValue="1.0" {...register("rightMark")} />
                 </FormControl>
                 <FormControl id="wrongMark">
                   <FormLabel>Wrong mark</FormLabel>
-                  <Input
-                    type="number"
-                    defaultValue="0"
-                    {...register("wrong_mark")}
-                  />
+                  <Input defaultValue="0.0" {...register("wrongMark")} />
                 </FormControl>
               </HStack>
             </Stack>
@@ -208,9 +235,9 @@ const CreateQuestion = () => {
             </Heading>
 
             <Stack spacing="6">
-              <FormControl id="question">
+              <FormControl id="question" isRequired>
                 <FormLabel>Write your question</FormLabel>
-                <TextEditor />
+                <TextEditor handleEditorChange={handleEditorChange} />
               </FormControl>
 
               {isMcqSelected && (
@@ -252,9 +279,13 @@ const CreateQuestion = () => {
                 </>
               )}
 
-              <FormControl id="solutions">
-                <FormLabel>Solutions</FormLabel>
-                <Textarea height="48" focusBorderColor="messenger.500" />
+              <FormControl id="solution">
+                <FormLabel>Solution</FormLabel>
+                <Textarea
+                  height="48"
+                  focusBorderColor="messenger.500"
+                  {...register("solution")}
+                />
               </FormControl>
             </Stack>
           </Box>

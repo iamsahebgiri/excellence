@@ -7,9 +7,11 @@ import {
   IconButton,
   Spacer,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import { HiOutlineX } from "react-icons/hi";
 
 const CreateQuestionHeading = () => {
+  const router = useRouter();
   return (
     <>
       <Flex
@@ -18,7 +20,7 @@ const CreateQuestionHeading = () => {
         zIndex="2"
         position="fixed"
         width="100%"
-        p="4"
+        p="3"
         alignItems="center"
       >
         <IconButton

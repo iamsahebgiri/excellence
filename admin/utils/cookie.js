@@ -1,7 +1,8 @@
 const setCookie = (cname, cvalue, expiresDate) => {
-  const d = new Date(expiresDate);
+  const d = new Date(new Date(expiresDate) - 10000); // expires ten seconds earlier
   const expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  document.cookie =
+    cname + "=" + cvalue + ";" + expires + ";path=/" + ";SameSite=None; Secure";
 };
 
 const removeCookie = (cname) => {

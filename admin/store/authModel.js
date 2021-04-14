@@ -1,8 +1,7 @@
 import Router from "next/router";
 import { action, thunk } from "easy-peasy";
-import axios from "@/utils/axios";
+import axios from "axios";
 import config from "config/config";
-import { getCookie, removeCookie, setCookie } from "@/utils/cookie";
 
 const authModel = {
   user: null,
@@ -31,20 +30,12 @@ const authModel = {
       );
       console.log(data);
       actions.setUser(data.user);
-      setCookie(
-        "accessToken",
-        data.tokens.access.token,
-        data.tokens.access.expires
-      );
-      setCookie(
-        "refreshToken",
-        data.tokens.refresh.token,
-        data.tokens.refresh.expires
-      );
+      localStorage.setItem("accessToken", data.tokens.access.token);
+      localStorage.setItem("refreshToken", data.tokens.refresh.token);
       actions.setIsSubmitting(false);
       Router.replace("/");
     } catch (error) {
-      actions.setError(error.response.data.message);
+      actions.setError(error.response?.data?.message);
       actions.setIsSubmitting(false);
     }
   }),
@@ -53,14 +44,14 @@ const authModel = {
     console.log("Loging out....");
     try {
       await axios.post(`${config.API_URL}/auth/logout`, {
-        refreshToken: getCookie("refreshToken"),
+        refreshToken: localStorage.getItem("refreshToken"),
       });
       actions.setUser(null);
-      removeCookie("accessToken");
-      removeCookie("refreshToken");
+      localStorage.removeItem("accessToken");
+      localStorage.removeItem("refreshToken");
       Router.replace("/login");
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response?.data);
     }
   }),
 
@@ -75,21 +66,13 @@ const authModel = {
       );
       console.log(data);
       actions.setUser(data.user);
-      setCookie(
-        "accessToken",
-        data.tokens.access.token,
-        data.tokens.access.expires
-      );
-      setCookie(
-        "refreshToken",
-        data.tokens.refresh.token,
-        data.tokens.refresh.expires
-      );
+      localStorage.setItem("accessToken", data.tokens.access.token);
+      localStorage.setItem("refreshToken", data.tokens.refresh.token);
       actions.setIsSubmitting(false);
       Router.replace("/");
     } catch (error) {
-      console.log(error.response.data);
-      actions.setError(error.response.data.message);
+      console.log(error.response?.data);
+      actions.setError(error.response?.data?.message);
       actions.setIsSubmitting(false);
     }
   }),
