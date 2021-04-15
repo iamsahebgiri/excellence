@@ -3,6 +3,7 @@ import store from "@/store/index";
 import { StoreProvider, useStoreRehydrated } from "easy-peasy";
 import { ChakraProvider } from "@chakra-ui/react";
 import { SWRConfig } from "swr";
+import axios from "@/utils/axios";
 
 function WaitForStateRehydration({ children }) {
   const isRehydrated = useStoreRehydrated();
@@ -16,7 +17,7 @@ const App = ({ Component, pageProps }) => {
         <SWRConfig
           value={{
             fetcher: (resource, init) =>
-              fetch(resource, init).then((res) => res.json()),
+              axios.get(resource).then((res) => res.data),
           }}
         >
           <WaitForStateRehydration>
