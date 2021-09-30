@@ -1,6 +1,6 @@
-import DashboardShell from "@/components/DashboardShell";
+import DashboardShell from "@/components/dashboard/DashboardShell";
 import EmptyState from "@/components/EmptyState";
-import PageHeading from "@/components/PageHeading";
+import PageHeading from "@/components/common/PageHeading";
 import PaperListItem from "@/components/papers/PaperListItem";
 
 const Papers = () => {

@@ -4,11 +4,16 @@ const { Question } = require('../models');
 const ApiError = require('../utils/ApiError');
 
 /**
- * Query for questions
+ * Query for users
+ * @param {Object} filter - Mongo filter
+ * @param {Object} options - Query options
+ * @param {string} [options.sortBy] - Sort option in the format: sortField:(desc|asc)
+ * @param {number} [options.limit] - Maximum number of results per page (default = 10)
+ * @param {number} [options.page] - Current page (default = 1)
  * @returns {Promise<QueryResult>}
  */
-const queryQuestions = async () => {
-  const questions = await Question.find();
+const queryQuestions = async (filter, options) => {
+  const questions = await Question.paginate(filter, options);
   return questions;
 };
 
@@ -30,6 +35,15 @@ const createQuestion = async (questionBody) => {
  */
 const getQuestionById = async (id) => {
   return Question.findById(id);
+};
+
+/**
+ * Get populated question by id
+ * @param {ObjectId} id
+ * @returns {Promise<Question>}
+ */
+const getPopulatedQuestionById = async (id) => {
+  return Question.findById(id).populate('creator courseId classId subjectId');
 };
 
 /**
@@ -66,6 +80,7 @@ module.exports = {
   queryQuestions,
   createQuestion,
   getQuestionById,
+  getPopulatedQuestionById,
   updateQuestionById,
   deleteQuestionById,
 };

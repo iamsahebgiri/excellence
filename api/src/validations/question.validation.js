@@ -16,6 +16,8 @@ const createQuestion = {
     wrongMark: Joi.number().max(0),
     difficultyLevel: Joi.string().valid('beginner', 'easy', 'normal', 'hard', 'very hard'),
     subjectId: Joi.string(),
+    classId: Joi.string(),
+    courseId: Joi.string(),
     creator: Joi.string(),
   }),
 };
@@ -45,6 +47,8 @@ const updateQuestion = {
       wrongMark: Joi.number().max(0),
       difficultyLevel: Joi.string().valid('beginner', 'easy', 'normal', 'hard', 'very hard'),
       subjectId: Joi.string(),
+      classId: Joi.string(),
+      courseId: Joi.string(),
     })
     .min(1),
 };

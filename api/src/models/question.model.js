@@ -15,7 +15,6 @@ const questionSchema = mongoose.Schema(
     },
     solution: {
       type: String,
-      index: true,
     },
     optionA: String,
     optionB: String,
@@ -39,6 +38,14 @@ const questionSchema = mongoose.Schema(
     subjectId: {
       type: Number,
       ref: 'Subject',
+    },
+    classId: {
+      type: Number,
+      ref: 'Class',
+    },
+    courseId: {
+      type: Number,
+      ref: 'Course',
     },
     creator: {
       type: mongoose.SchemaTypes.ObjectId,

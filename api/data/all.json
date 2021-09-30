@@ -1,0 +1,347 @@
+{
+  "status": "200",
+  "categories": [
+    {
+      "id": 2877,
+      "name": "CBSE",
+      "weight": 1,
+      "parent": null,
+      "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/cbse.png",
+      "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/cbse.png",
+      "children": [
+        {
+          "id": 1250,
+          "name": "Class 12",
+          "weight": 1,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_12_1.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_12_1.png"
+        },
+        {
+          "id": 1339,
+          "name": "Class 11",
+          "weight": 2,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_11.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_11.png"
+        },
+        {
+          "id": 1175,
+          "name": "Class 10",
+          "weight": 3,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_10.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_10.png"
+        },
+        {
+          "id": 1217,
+          "name": "Class 09",
+          "weight": 4,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_09.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_09.png"
+        },
+        {
+          "id": 1443,
+          "name": "Class 08",
+          "weight": 5,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_08.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_08.png"
+        },
+        {
+          "id": 1444,
+          "name": "Class 07",
+          "weight": 6,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_07.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_07.png"
+        },
+        {
+          "id": 1445,
+          "name": "Class 06",
+          "weight": 7,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_06.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_06.png"
+        },
+        {
+          "id": 1446,
+          "name": "Class 05",
+          "weight": 8,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_05.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_05.png"
+        },
+        {
+          "id": 1447,
+          "name": "Class 04",
+          "weight": 9,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_04.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_04.png"
+        },
+        {
+          "id": 1448,
+          "name": "Class 03",
+          "weight": 10,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_03.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_03.png"
+        },
+        {
+          "id": 2599,
+          "name": "Class 02",
+          "weight": 28,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_02.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_02.png"
+        },
+        {
+          "id": 2600,
+          "name": "Class 01",
+          "weight": 29,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_01.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_01.png"
+        },
+        {
+          "id": 2594,
+          "name": "Pre-School",
+          "weight": 30,
+          "parent": 2877,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/preschool.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/preschool.png"
+        }
+      ]
+    },
+    {
+      "id": 2878,
+      "name": "Entrance Exam",
+      "weight": 2,
+      "parent": null,
+      "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/entrance.png",
+      "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/entrance.png",
+      "children": [
+        {
+          "id": 2593,
+          "name": "JEE main",
+          "weight": 100,
+          "parent": 2878,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/entrance_exams.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/entrance_exams.png"
+        },
+        {
+          "id": 1835,
+          "name": "NEET-UG",
+          "weight": 100,
+          "parent": 2878,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/entrance_exams.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/entrance_exams.png"
+        }
+      ]
+    },
+    {
+      "id": 3313,
+      "name": "Competitive Exams",
+      "weight": 3,
+      "parent": null,
+      "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/comp_final.png",
+      "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/comp_final.png",
+      "children": [
+        {
+          "id": 3314,
+          "name": "SSC CGL",
+          "weight": 1,
+          "parent": 3313,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/ssc.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/ssc.png"
+        },
+        {
+          "id": 9615,
+          "name": "NDA",
+          "weight": 1,
+          "parent": 3313,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_12_1.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_12_1.png"
+        }
+      ]
+    },
+    {
+      "id": 4176,
+      "name": "ICSE & ISC",
+      "weight": 4,
+      "parent": null,
+      "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/icse_logo.gif",
+      "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/icse_logo.gif",
+      "children": [
+        { "id": 4941, "name": "Class 01", "weight": 1, "parent": 4176, "web_logo": null, "mobile_logo": null },
+        { "id": 4938, "name": "Class 02", "weight": 2, "parent": 4176, "web_logo": null, "mobile_logo": null },
+        { "id": 4935, "name": "Class 03", "weight": 3, "parent": 4176, "web_logo": null, "mobile_logo": null },
+        { "id": 4932, "name": "Class 04", "weight": 4, "parent": 4176, "web_logo": null, "mobile_logo": null },
+        { "id": 4929, "name": "Class 05", "weight": 5, "parent": 4176, "web_logo": null, "mobile_logo": null },
+        { "id": 4926, "name": "Class 06", "weight": 6, "parent": 4176, "web_logo": null, "mobile_logo": null },
+        { "id": 4923, "name": "Class 07", "weight": 7, "parent": 4176, "web_logo": null, "mobile_logo": null },
+        { "id": 4920, "name": "Class 08", "weight": 8, "parent": 4176, "web_logo": null, "mobile_logo": null },
+        {
+          "id": 4189,
+          "name": "Class 09",
+          "weight": 9,
+          "parent": 4176,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_09.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_09.png"
+        },
+        {
+          "id": 4188,
+          "name": "Class 10",
+          "weight": 10,
+          "parent": 4176,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_10.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_10.png"
+        },
+        {
+          "id": 4187,
+          "name": "Class 11",
+          "weight": 11,
+          "parent": 4176,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_11.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_11.png"
+        },
+        {
+          "id": 4186,
+          "name": "Class 12",
+          "weight": 12,
+          "parent": 4176,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_12_1.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_12_1.png"
+        }
+      ]
+    },
+    {
+      "id": 2879,
+      "name": "Teacher Exams",
+      "weight": 11,
+      "parent": null,
+      "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/teacher.png",
+      "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/teacher.png",
+      "children": [
+        {
+          "id": 3028,
+          "name": "DSSSB Delhi",
+          "weight": 2,
+          "parent": 2879,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/dsssb.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/dsssb.png"
+        },
+        {
+          "id": 2582,
+          "name": "CTET",
+          "weight": 100,
+          "parent": 2879,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/entrance_exams.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/entrance_exams.png"
+        }
+      ]
+    },
+    {
+      "id": 2880,
+      "name": "UP Board",
+      "weight": 30,
+      "parent": null,
+      "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/upmps/upmsp_web.png",
+      "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/upmps/upmsp_mob.png",
+      "children": [
+        { "id": 5037, "name": "Class 01", "weight": 1, "parent": 2880, "web_logo": null, "mobile_logo": null },
+        { "id": 5034, "name": "Class 02", "weight": 2, "parent": 2880, "web_logo": null, "mobile_logo": null },
+        { "id": 5031, "name": "Class 03", "weight": 3, "parent": 2880, "web_logo": null, "mobile_logo": null },
+        { "id": 5028, "name": "Class 04", "weight": 4, "parent": 2880, "web_logo": null, "mobile_logo": null },
+        { "id": 5025, "name": "Class 05", "weight": 5, "parent": 2880, "web_logo": null, "mobile_logo": null },
+        { "id": 5040, "name": "Class 06", "weight": 6, "parent": 2880, "web_logo": null, "mobile_logo": null },
+        { "id": 5019, "name": "Class 07", "weight": 7, "parent": 2880, "web_logo": null, "mobile_logo": null },
+        { "id": 5016, "name": "Class 08", "weight": 8, "parent": 2880, "web_logo": null, "mobile_logo": null },
+        {
+          "id": 2884,
+          "name": "Class 09",
+          "weight": 9,
+          "parent": 2880,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_09.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_09.png"
+        },
+        {
+          "id": 2883,
+          "name": "Class 10",
+          "weight": 10,
+          "parent": 2880,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_10.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_10.png"
+        },
+        {
+          "id": 2882,
+          "name": "Class 11",
+          "weight": 11,
+          "parent": 2880,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_11.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_11.png"
+        },
+        {
+          "id": 2881,
+          "name": "Class 12",
+          "weight": 12,
+          "parent": 2880,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_12_1.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_12_1.png"
+        }
+      ]
+    },
+    {
+      "id": 3747,
+      "name": "Uttarakhand Board",
+      "weight": 40,
+      "parent": null,
+      "web_logo": "https://media-mycbseguide.s3-ap-south-1.amazonaws.com/images/category/ukboard.png",
+      "mobile_logo": "https://media-mycbseguide.s3-ap-south-1.amazonaws.com/images/category/ukboard.png",
+      "children": [
+        { "id": 5083, "name": "Class 01", "weight": 1, "parent": 3747, "web_logo": null, "mobile_logo": null },
+        { "id": 5080, "name": "Class 02", "weight": 2, "parent": 3747, "web_logo": null, "mobile_logo": null },
+        { "id": 5077, "name": "Class 03", "weight": 3, "parent": 3747, "web_logo": null, "mobile_logo": null },
+        { "id": 5074, "name": "Class 04", "weight": 4, "parent": 3747, "web_logo": null, "mobile_logo": null },
+        { "id": 5071, "name": "Class 05", "weight": 5, "parent": 3747, "web_logo": null, "mobile_logo": null },
+        { "id": 5068, "name": "Class 06", "weight": 6, "parent": 3747, "web_logo": null, "mobile_logo": null },
+        { "id": 5065, "name": "Class 07", "weight": 7, "parent": 3747, "web_logo": null, "mobile_logo": null },
+        { "id": 5062, "name": "Class 08", "weight": 8, "parent": 3747, "web_logo": null, "mobile_logo": null },
+        {
+          "id": 3748,
+          "name": "Class 09",
+          "weight": 9,
+          "parent": 3747,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_09.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_09.png"
+        },
+        {
+          "id": 3749,
+          "name": "Class 10",
+          "weight": 10,
+          "parent": 3747,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_10.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_10.png"
+        },
+        {
+          "id": 3750,
+          "name": "Class 11",
+          "weight": 11,
+          "parent": 3747,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_11.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_11.png"
+        },
+        {
+          "id": 3751,
+          "name": "Class 12",
+          "weight": 12,
+          "parent": 3747,
+          "web_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_12_1.png",
+          "mobile_logo": "https://media-mycbseguide.s3.amazonaws.com/images/category/class_12_1.png"
+        }
+      ]
+    }
+  ]
+}

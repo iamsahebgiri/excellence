@@ -4,3 +4,4 @@ module.exports.courseController = require('./course.controller');
 module.exports.subjectController = require('./subject.controller');
 module.exports.questionController = require('./question.controller');
 module.exports.userController = require('./user.controller');
+module.exports.categoryController = require('./category.controller');

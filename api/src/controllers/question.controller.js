@@ -2,9 +2,12 @@ const httpStatus = require('http-status');
 const catchAsync = require('../utils/catchAsync');
 const { questionService } = require('../services');
 const ApiError = require('../utils/ApiError');
+const pick = require('../utils/pick');
 
 const getQuestions = catchAsync(async (req, res) => {
-  const result = await questionService.queryQuestions();
+  const filter = pick(req.query, ['name', 'role']);
+  const options = pick(req.query, ['sortBy', 'limit', 'page']);
+  const result = await questionService.queryQuestions(filter, options);
   res.send(result);
 });
 
@@ -15,7 +18,7 @@ const createQuestion = catchAsync(async (req, res) => {
 });
 
 const getQuestion = catchAsync(async (req, res) => {
-  const question = await questionService.getQuestionById(req.params.questionId);
+  const question = await questionService.getPopulatedQuestionById(req.params.questionId);
   if (!question) {
     throw new ApiError(httpStatus.NOT_FOUND, 'Question not found');
   }

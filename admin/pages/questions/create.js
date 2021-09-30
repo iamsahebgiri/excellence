@@ -1,5 +1,5 @@
 import CreateQuestionHeading from "@/components/questions/CreateQuestionHeading";
-import SelectField from "@/components/SelectField";
+import SelectField from "@/components/common/SelectField";
 import axios from "@/utils/axios";
 import {
   Box,
@@ -23,7 +23,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-const TextEditor = dynamic(() => import("@/components/TextEditor"), {
+const TextEditor = dynamic(() => import("@/components/questions/TextEditor"), {
   ssr: false,
 });
 
@@ -45,7 +45,7 @@ const CreateQuestion = () => {
   const [isMcqSelected, setIsMcqSelected] = useState(false);
   const [editorValue, setEditorValue] = useState("");
   const { register, control, handleSubmit } = useForm();
-  
+
   const toast = useToast();
   const router = useRouter();
 
@@ -54,34 +54,34 @@ const CreateQuestion = () => {
   }, []);
 
   const onSubmit = async (formData) => {
-    axios
-      .post(`${config.API_URL}/questions`, {
-        ...formData,
-        questionText: editorValue,
-      })
-      .then((res) => {
-        const { data } = res;
-        console.log(data);
-        toast({
-          title: "Question added successfully",
-          description: "Your question has been added successfully.",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-        });
+    console.log(formData);
+    // axios
+    //   .post(`${config.API_URL}/questions`, {
+    //     ...formData,
+    //     questionText: editorValue,
+    //   })
+    //   .then((res) => {
+    //     const { data } = res;
+    //     console.log(data);
+    //     toast({
+    //       title: "Question added successfully",
+    //       description: "Your question has been added successfully.",
+    //       status: "success",
+    //       duration: 3000,
+    //       isClosable: true,
+    //     });
 
-        router.push("/questions");
-      })
-      .catch((err) => {
-        // console.log(err.response);
-        toast({
-          title: "Invalid question",
-          description: err.response?.data?.message,
-          status: "error",
-          duration: 9000,
-          isClosable: true,
-        });
-      });
+    //     router.push("/questions");
+    //   })
+    //   .catch((err) => {
+    //     toast({
+    //       title: "Invalid question",
+    //       description: err.response?.data?.message,
+    //       status: "error",
+    //       duration: 9000,
+    //       isClosable: true,
+    //     });
+    //   });
   };
 
   const handleOnChange = (e) => {
@@ -91,7 +91,7 @@ const CreateQuestion = () => {
     }
 
     if (e.target.id === "class") {
-      getSubjects(e.target.value);
+      if (e.target.value !== "") getSubjects(e.target.value);
     }
 
     if (e.target.id === "questionType") {
@@ -256,26 +256,42 @@ const CreateQuestion = () => {
                       <Switch id="email-alerts" />
                     </FormControl>
                   </Flex>
-                  <RadioGroup defaultValue="a">
+                  <Controller
+                    as={
+                      <RadioGroup
+                        ref={register("gender")}
+                        name="gender"
+                        isInline
+                        spacing={4}
+                        defaultValue="MALE"
+                      >
+                        <Radio value="MALE"> Male </Radio>
+                        <Radio value="FEMALE">Female</Radio>
+                      </RadioGroup>
+                    }
+                    name="gender"
+                    control={control}
+                  />
+                  {/* <RadioGroup defaultValue="a">
                     <Stack spacing="6">
                       <Flex>
-                        <Radio value="a" mr="4" />
-                        <Input type="text" />
+                        <Radio value="a" mr="4" {...register("radioValue")} />
+                        <Input type="text" {...register("optionA")} />
                       </Flex>
                       <Flex>
                         <Radio value="b" mr="4" />
-                        <Input type="text" />
+                        <Input type="text" {...register("optionB")} />
                       </Flex>
                       <Flex>
                         <Radio value="c" mr="4" />
-                        <Input type="text" />
+                        <Input type="text" {...register("optionC")} />
                       </Flex>
                       <Flex>
                         <Radio value="d" mr="4" />
-                        <Input type="text" />
+                        <Input type="text" {...register("optionD")} />
                       </Flex>
                     </Stack>
-                  </RadioGroup>
+                  </RadioGroup> */}
                 </>
               )}
 

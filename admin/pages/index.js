@@ -1,5 +1,5 @@
-import DashboardShell from "@/components/DashboardShell";
-import PageHeading from "@/components/PageHeading";
+import DashboardShell from "@/components/dashboard/DashboardShell";
+import PageHeading from "@/components/common/PageHeading";
 import { useStoreState } from "easy-peasy";
 
 const Index = () => {

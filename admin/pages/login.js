@@ -1,5 +1,5 @@
-import { DividerWithText } from "@/components/DividerWithText";
-import { LoginForm } from "@/components/LoginForm";
+import { DividerWithText } from "@/components/common/DividerWithText";
+import { LoginForm } from "@/components/auth/LoginForm";
 import {
   Box,
   Button,
